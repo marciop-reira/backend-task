@@ -1,0 +1,36 @@
+version: '3.7'
+
+networks:
+  backend-task:
+    driver:
+      bridge
+
+services:
+  mongodb:
+    build: ./mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: prisma
+      MONGO_INITDB_DATABASE: backend-task
+      MONGO_REPLICA_HOST: localhost
+      MONGO_REPLICA_PORT: 27017
+      INIT_WAIT_SEC: 3
+    ports:
+      - 27017:27017
+    networks:
+      - backend-task
+
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: admin
+      RABBITMQ_DEFAULT_PASS: admin
+    volumes:
+      - /var/lib/rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks:
+      - backend-task
