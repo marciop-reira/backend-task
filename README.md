@@ -3,7 +3,6 @@
 ## Content Table
 
 - [Backend Task](#backend-task)
-  - [Tabela de Conteúdo](#tabela-de-conteúdo)
   - [About The Project](#about-the-project)
     - [Techs](#techs)
   - [Installation](#installation)
